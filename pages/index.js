@@ -1,5 +1,7 @@
 // pages/index.js
 
+// Triggering fresh Vercel build
+
 export default function Home() {
   return (
     <div style={{ fontFamily: 'sans-serif', lineHeight: '1.6' }}>
