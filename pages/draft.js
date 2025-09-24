@@ -31,8 +31,12 @@ export default function DraftPage() {
   }
 
   const handleSubmit = () => {
-    alert(`Team "${teamName}" drafted:\n${selectedSongs.join(', ')}`)
-    // Later: Save to local storage or database
+    const newTeam = { name: teamName, songs: selectedSongs }
+    const existingTeams = JSON.parse(localStorage.getItem('phantasyTeams')) || []
+    const updatedTeams = [...existingTeams, newTeam]
+    localStorage.setItem('phantasyTeams', JSON.stringify(updatedTeams))
+    alert(`Team "${teamName}" saved!`)
+}
   }
 
   return (
