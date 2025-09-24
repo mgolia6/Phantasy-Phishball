@@ -1,0 +1,16 @@
+/* styles/globals.css */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+nav {
+  margin-top: 2rem;
+}
