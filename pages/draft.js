@@ -1,23 +1,26 @@
-// pages/draft.js
-
-import { useState } from 'react'
-
-const songPool = [
-  'Tweezer',
-  'Ghost',
-  'Fluffhead',
-  'You Enjoy Myself',
-  'Harry Hood',
-  'Bathtub Gin',
-  'Chalk Dust Torture',
-  'Reba',
-  'Maze',
-  'Down with Disease'
-]
+import { useState, useEffect } from 'react'
 
 export default function DraftPage() {
   const [teamName, setTeamName] = useState('')
+  const [songPool, setSongPool] = useState([])
   const [selectedSongs, setSelectedSongs] = useState([])
+
+  const SONG_API_URL = 'https://api.phish.net/v5/songs.json?apikey=10645D7F59011FFA82A'
+
+  useEffect(() => {
+    async function fetchSongs() {
+      try {
+        const response = await fetch(SONG_API_URL)
+        const data = await response.json()
+        const songs = data.data.map((song) => song.title).sort()
+        setSongPool(songs)
+      } catch (error) {
+        console.error('Error fetching songs:', error)
+      }
+    }
+
+    fetchSongs()
+  }, [])
 
   const toggleSong = (song) => {
     setSelectedSongs((prev) =>
@@ -48,20 +51,24 @@ export default function DraftPage() {
       </label>
 
       <h2 style={{ marginTop: '2rem' }}>Select Your Songs</h2>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {songPool.map((song) => (
-          <li key={song} style={{ marginBottom: '0.5rem' }}>
-            <label>
-              <input
-                type="checkbox"
-                checked={selectedSongs.includes(song)}
-                onChange={() => toggleSong(song)}
-              />
-              {' '}{song}
-            </label>
-          </li>
-        ))}
-      </ul>
+      {songPool.length === 0 ? (
+        <p>Loading songs from Phish.net...</p>
+      ) : (
+        <ul style={{ listStyle: 'none', padding: 0, maxHeight: '400px', overflowY: 'scroll' }}>
+          {songPool.map((song) => (
+            <li key={song} style={{ marginBottom: '0.5rem' }}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={selectedSongs.includes(song)}
+                  onChange={() => toggleSong(song)}
+                />
+                {' '}{song}
+              </label>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <button
         onClick={handleSubmit}
