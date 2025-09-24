@@ -4,8 +4,8 @@ export default function Quiz() {
   const questions = [
     {
       question: 'Which Phish song features the lyric "I saw you with a ticket stub in your hand"?',
-      options: ['Golgi Appartus', 'YEM', 'Punch You in the Eye', 'Divided Sky'],
-      answer: 'Golgi Appartus',
+      options: ['Wilson', 'YEM', 'Punch You in the Eye', 'Divided Sky'],
+      answer: 'Punch You in the Eye',
     },
     {
       question: 'What year did Phish play their first show?',
@@ -49,13 +49,16 @@ export default function Quiz() {
       boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
     }}>
       <h1 style={{ color: '#333' }}>Phishball Quiz</h1>
+
       {showResult ? (
         <>
-          <p>You scored {score} out of {questions.length}!</p>
+          <p style={{ fontSize: '1.2rem' }}>You scored {score} out of {questions.length}!</p>
+
           <button
             onClick={handleRestart}
             style={{
               marginTop: '1rem',
+              marginRight: '1rem',
               padding: '0.5rem 1rem',
               backgroundColor: '#0070f3',
               color: '#fff',
@@ -66,10 +69,24 @@ export default function Quiz() {
           >
             Restart Quiz
           </button>
+
+          <a href="/" style={{
+            display: 'inline-block',
+            marginTop: '1rem',
+            padding: '0.5rem 1rem',
+            backgroundColor: '#ccc',
+            color: '#333',
+            textDecoration: 'none',
+            borderRadius: '4px'
+          }}>
+            Back to Home
+          </a>
         </>
       ) : (
         <>
-          <p>{questions[current].question}</p>
+          <p style={{ fontSize: '1.1rem' }}>Question {current + 1} of {questions.length}</p>
+          <p style={{ marginBottom: '1rem' }}>{questions[current].question}</p>
+
           {questions[current].options.map((option) => (
             <div key={option} style={{ marginBottom: '0.5rem' }}>
               <label>
@@ -84,6 +101,7 @@ export default function Quiz() {
               </label>
             </div>
           ))}
+
           <button
             onClick={handleSubmit}
             style={{
