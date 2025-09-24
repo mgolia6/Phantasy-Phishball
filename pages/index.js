@@ -9,6 +9,7 @@ export default function Home() {
       <header style={{ padding: '1rem', background: '#222', color: '#fff' }}>
         <h1>Phantasy Phishball</h1>
         <nav>
+          <a href="/quiz" style={{ marginRight: '1rem' }}>Quiz</a>
           <a href="/draft" style={{ marginRight: '1rem', color: '#fff' }}>Draft</a>
           <a href="/teams" style={{ marginRight: '1rem', color: '#fff' }}>Teams</a>
           <a href="/league" style={{ color: '#fff' }}>League</a>
