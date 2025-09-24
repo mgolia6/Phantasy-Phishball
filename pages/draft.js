@@ -36,7 +36,7 @@ export default function DraftPage() {
     const updatedTeams = [...existingTeams, newTeam]
     localStorage.setItem('phantasyTeams', JSON.stringify(updatedTeams))
     alert(`Team "${teamName}" saved!`)
-}
+  }
 
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '2rem' }}>
