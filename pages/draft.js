@@ -37,7 +37,6 @@ export default function DraftPage() {
     localStorage.setItem('phantasyTeams', JSON.stringify(updatedTeams))
     alert(`Team "${teamName}" saved!`)
 }
-  }
 
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '2rem' }}>
