@@ -4,8 +4,8 @@ export default function Quiz() {
   const questions = [
     {
       question: 'Which Phish song features the lyric "I saw you with a ticket stub in your hand"?',
-      options: ['Wilson', 'YEM', 'Reba', 'Divided Sky'],
-      answer: 'Wilson',
+      options: ['Golgi Appartus', 'YEM', 'Punch You in the Eye', 'Divided Sky'],
+      answer: 'Golgi Appartus',
     },
     {
       question: 'What year did Phish play their first show?',
@@ -31,16 +31,47 @@ export default function Quiz() {
     }
   }
 
+  const handleRestart = () => {
+    setCurrent(0)
+    setSelected('')
+    setScore(0)
+    setShowResult(false)
+  }
+
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: '2rem', maxWidth: '600px', margin: 'auto' }}>
-      <h1>Phishball Quiz</h1>
+    <div style={{
+      fontFamily: 'Arial, sans-serif',
+      padding: '2rem',
+      maxWidth: '600px',
+      margin: 'auto',
+      backgroundColor: '#f0f4ff',
+      borderRadius: '8px',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+    }}>
+      <h1 style={{ color: '#333' }}>Phishball Quiz</h1>
       {showResult ? (
-        <p>You scored {score} out of {questions.length}!</p>
+        <>
+          <p>You scored {score} out of {questions.length}!</p>
+          <button
+            onClick={handleRestart}
+            style={{
+              marginTop: '1rem',
+              padding: '0.5rem 1rem',
+              backgroundColor: '#0070f3',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Restart Quiz
+          </button>
+        </>
       ) : (
         <>
           <p>{questions[current].question}</p>
           {questions[current].options.map((option) => (
-            <div key={option}>
+            <div key={option} style={{ marginBottom: '0.5rem' }}>
               <label>
                 <input
                   type="radio"
@@ -55,7 +86,15 @@ export default function Quiz() {
           ))}
           <button
             onClick={handleSubmit}
-            style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}
+            style={{
+              marginTop: '1rem',
+              padding: '0.5rem 1rem',
+              backgroundColor: '#0070f3',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
             disabled={!selected}
           >
             Submit
